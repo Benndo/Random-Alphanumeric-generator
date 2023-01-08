@@ -20,3 +20,10 @@ label {
     cursor: pointer;
     width: 200px;
 }
+#ANS_A{
+    resize: none;
+    background-color: midnightblue;
+    color: white;
+    border: none;
+    text-align: center;
+}

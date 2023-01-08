@@ -20,9 +20,10 @@
     <label><input id="ANS_F" name="Alphanumeric" type="radio" />Alphanumeric</label>
     <label><input id="ANS_G" name="Special" type="checkbox" />Include punctuation marks</label>
     <button onClick="Generate()">
-        GENERATE!
-    </button>
-    <p id="ANS_A"></p>
+        GENERATE! 
+    </button><br><br>
+
+    <textarea id="ANS_A" readonly ></textarea>
     <script>
         var error = "Not approved Variable";
         function randomStr(len, arr) {
@@ -50,12 +51,12 @@
             }
 
             if (len < 1) {
-                document.getElementById("ANS_A").innerHTML = error;
+                document.getElementById("ANS_A").innerText = error;
                 return;
             }
 
             var result = randomStr(len, characters);
-            document.getElementById("ANS_A").innerHTML = result;
+            document.getElementById("ANS_A").innerText = result;
         }
     </script>
 </body>
