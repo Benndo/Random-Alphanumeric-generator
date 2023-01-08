@@ -1,0 +1,22 @@
+﻿body
+{
+    background-color: midnightblue;
+    color: ghostwhite;
+    text-align: center;
+}
+
+button {
+    background-color: midnightblue;
+    color: ghostwhite;
+    border: 1px dashed lightgrey;
+    cursor: pointer;
+    text-align: center;
+    margin: auto;
+}
+label {
+    display: block;
+    text-align: left;
+    margin: 15px auto;
+    cursor: pointer;
+    width: 200px;
+}
