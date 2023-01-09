@@ -21,11 +21,15 @@
     <label><input id="ANS_G" name="Special" type="checkbox" />Include punctuation marks</label>
     <button onClick="Generate()">
         GENERATE! 
-    </button><br><br>
+    </button>
+    <button onClick="CopyToClipboard()">
+        Copy to Clipboard 
+    </button>
+    <br><br>
 
     <textarea id="ANS_A" readonly ></textarea>
+    
     <script>
-        var error = "Not approved Variable";
         function randomStr(len, arr) {
             var ans = '';
             for (var i = len; i > 0; i--) {
@@ -33,7 +37,7 @@
             }
             return ans;
         }
-
+       
         function Generate() {
             var len = document.getElementById("ANS_C").value;
             var characters = '';
@@ -50,14 +54,26 @@
                 characters += '!@#$%^&*()_+-=[]{};:\'",.<>/?\\|';
             }
 
-            if (len < 1) {
-                document.getElementById("ANS_A").innerText = error;
+            if (len < 1 || characters == '') {
+                document.getElementById("ANS_A").innerText = "Not approved Variable";
                 return;
             }
-
+            
             var result = randomStr(len, characters);
             document.getElementById("ANS_A").innerText = result;
+            document.getElementById("ANS_A").style.height = "auto";
+            document.getElementById("ANS_A").style.height =  document.getElementById("ANS_A").scrollHeight + "px";
         }
+
+        // src: https://www.w3schools.com/howto/howto_js_copy_clipboard.asp
+        function CopyToClipboard() {
+            var text = document.getElementById("ANS_A");
+
+            text.select();
+            text.setSelectionRange(0, 99999); 
+            
+            navigator.clipboard.writeText(text.value);
+        } 
     </script>
 </body>
 
