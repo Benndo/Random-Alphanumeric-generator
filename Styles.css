@@ -24,6 +24,10 @@ label {
     resize: none;
     background-color: midnightblue;
     color: white;
-    border: none;
     text-align: center;
+    border: none;
+    width: 90%;
+    outline: none;
+    cursor:default;
+    line-break: anywhere;
 }
