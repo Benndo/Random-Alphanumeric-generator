@@ -14,12 +14,18 @@
        style="font-size: 19px;
 			font-weight: bold;">
     </p>
-    <label><input placeholder="Number of characters" type="number" value="" min="1" id="ANS_C" /></label>
-    <label><input id="ANS_D" name="Alphanumeric" type="radio" />Numeric</label>
-    <label><input id="ANS_E" name="Alphanumeric" type="radio" />Alphabetic</label>
-    <label><input id="ANS_F" name="Alphanumeric" type="radio" />Alphanumeric</label>
-    <label><input id="ANS_G" name="Special" type="checkbox" />Include punctuation marks</label>
-    <button onClick="Generate()">
+    <label><input class="lang" placeholder="Number of characters" type="number" value="" min="1" id="ANS_C" /></label>
+    <label><input class="lang" id="ANS_D" name="Alphanumeric" type="radio" />Numeric</label>
+    <label><input class="lang" id="ANS_E" name="Alphanumeric" type="radio" />Alphabetic</label>
+    <label><input class="lang" id="ANS_F" name="Alphanumeric" type="radio" />Alphanumeric</label>
+    <label><input  class="lang" id="ANS_G" name="Special" type="checkbox" />Include punctuation marks</label>
+    <label>
+        <select id="lang" name="language">
+            <option value="EN">English</option>
+            <option value="DE">German</option>
+        </select>
+    </label>
+    <button id="generate" onClick="Generate()">
         GENERATE!
     </button>
     <button onClick="CopyToClipboard()">
@@ -30,6 +36,7 @@
     <textarea id="ANS_A" readonly></textarea>
 
     <script>
+        document.getElementById("lang").addEventListener("change", updateLanguage);
         function randomStr(len, arr) {
             var ans = '';
             for (var i = len; i > 0; i--) {
@@ -53,16 +60,15 @@
             if (document.getElementById("ANS_G").checked) {
                 characters += '!@#$%^&*()_+-=[]{};:\'",.<>/?\\|';
             }
-
             if (len < 1 || characters == '') {
                 document.getElementById("ANS_A").innerText = "Not approved Variable";
                 return;
             }
 
-            var result = randomStr(len, characters);
-            document.getElementById("ANS_A").innerText = result;
-            document.getElementById("ANS_A").style.height = "auto";
-            document.getElementById("ANS_A").style.height = document.getElementById("ANS_A").scrollHeight + "px";
+        var result = randomStr(len, characters);
+        document.getElementById("ANS_A").innerText = result;
+        document.getElementById("ANS_A").style.height = "auto";
+        document.getElementById("ANS_A").style.height = document.getElementById("ANS_A").scrollHeight + "px";
         }
 
         function CopyToClipboard() {
@@ -73,11 +79,59 @@
 
             navigator.clipboard.writeText(text.value);
         }
+        var language = {
+            DE: {
+                generate: "GENERIEREN",
+                copy: "KOPIEREN",
+                title: "Alpha-numerischer Zufallsgenerator",
+                error: "Nicht zulässige Variable",
+                lang: "Deutsch",
+                label: ["Anzahl der Zeichen", "Numerisch", "Alphabetisch", "Alphanumerisch", "Sonderzeichen"]
+            },
+            EN: {
+                generate: "GENERATE!",
+                copy: "Copy to Clipboard",
+                title: "Alphanumeric Generator",
+                error: "Not approved Variable",
+                lang: "English",
+                label: ["Number of characters", "Numeric", "Alphabetic", "Alphanumeric", "Include punctuation marks"]
+            }
+        }
+
+
+        function updateLanguage() {
+            document.getElementById("lang").value = lang;
+            document.getElementById("generate").innerHTML = language.DE.generate;
+            var lang = document.getElementById("lang").value;
+            var generateBtn = document.querySelector("button:first-of-type");
+            var copyBtn = document.querySelector("button:last-of-type");
+            var title = document.querySelector("h1");
+            var error = document.querySelector("#ANS_A");
+            var labels = document.querySelectorAll(".lang");
+            if (lang === "DE") {
+                generateBtn.innerText = language.DE.generate;
+                copyBtn.innerText = language.DE.copy;
+                title.innerText = language.DE.title;
+                error.placeholder = language.DE.error;
+                labels.forEach(function (element, index) {
+                    element.textContent = language.DE.labels[index];
+                });
+            } else if (lang === "EN") {
+                generateBtn.innerText = language.EN.generate;
+                copyBtn.innerText = language.EN.copy;
+                title.innerText = language.EN.title;
+                error.placeholder = language.EN.error;
+                labels.forEach(function (element, index) {
+                    element.innerText = language.EN.labels[index];
+                });
+            }
+        }
     </script>
 </body>
+
+</html>
 <footer class="footer">
-    <p><a class="link" href="https://github.com/Benndo/Random-Alphanumeric-generator/blob/main/Random-gen.html" target="_blank">GitHub</a></p>
-    <p><a class="link"  href="https://discord.gg/4qAuHTTrpG" target="_blank">Discord</a></p>
+    <p><a class="link" href="https://github.com/Benndo/Random-Alphanumeric-generator" target="_blank">GitHub</a></p>
+    <p><a class="link" href="https://discord.gg/4qAuHTTrpG" target="_blank">Discord</a></p>
     <p class="Copyright">(©2023 Benndo)</p>
 </footer>
-</html>

@@ -1,9 +1,8 @@
-﻿body {
+﻿﻿body {
     background-color: midnightblue;
     color: ghostwhite;
     text-align: center;
     width: auto;
-    max-width: 1em;
 }
 
 button {
@@ -37,8 +36,7 @@ label {
 
 .footer {
     color: black;
-    text-align:center;
-    
+    text-align: center;
 }
 
 .Copyright {
@@ -47,4 +45,21 @@ label {
 
 .link {
     color: midnightblue;
+}
+
+textarea {
+    width: 100%;
+    min-width:max-content;
+}
+
+body {
+    background-color: darkgrey;
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+    text-decoration-style: initial;
+    text-decoration-color: midnightblue;
+    font-family: Verdana;
 }
